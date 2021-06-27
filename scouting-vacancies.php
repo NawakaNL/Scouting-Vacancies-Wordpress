@@ -41,7 +41,7 @@ function vacancies_display($atts) {
 		foreach($xml->channel->item as $item)
 		{
 			if ($item->link == $vacancy) {
-				$html .= '<article class="elementor-post">';
+				$html .= '<article>';
 				$html .= "<h1>".$item->title."</h1>";
 				$html .= "<h3>".$item->section->name."</h3>";
 				$html .= "<p>".$item->description."</p>";
@@ -71,27 +71,30 @@ function vacancies_display($atts) {
 	} else {
 		$html = "<h1>Vacatures</h1>";
 		
+		// Group vacancies by section
 		$vacancies = array();
 		foreach($xml->channel->item as $item) {
 			if (isset($item->section->name)) {
 				$vacancies[(string)$item->section->name][] = $item;
 			}
 		}
-				
+		
+		// Loop grouped sections
 		foreach($vacancies as $section)
 		{
 			$section_title = "";
 			foreach ($section as $item) {
-				if ($item->organisation->attributes()->id == $atts["organisation"]) {
+				if (!isset($atts["organisation"]) || $item->organisation->attributes()->id == $atts["organisation"]) {
+					// Append new section, create a title
 					if (strcmp($item->section->name, $section_title)) {
 						$html .= "<h2>".$item->section->name."</h2>";
 						$section_title = $item->section->name;
 					}
-					$html .= '<article class="elementor-post">';
+
+					// Add vacancy
 					$html .= '<a href="?vacancy='.$item->link.'">';
 					$html .= "<li>".$item->title."</li>";
 					$html .= '</a>'; 
-					$html .= '</article>'; 
 				}
 			}
 		}
