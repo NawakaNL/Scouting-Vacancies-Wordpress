@@ -11,11 +11,23 @@
 
 
 function vacancies_display($atts) {
-    // Get a response
-    if (isset($attr['url'])) {
-        $response = wp_remote_get($attr['url']);
-    } else {
-        $response = wp_remote_get('https://sol.scouting.nl/hrm/vacancies/api.xml');
+    // Check if response is set in database
+    if ( false === ( $response = get_transient( 'value' ) ) ) {
+        // This code runs when there is no valid transient set
+
+        // Get a response
+        if (isset($attr['url'])) {
+            $response = wp_remote_get($attr['url']);
+        } else {
+            $response = wp_remote_get('https://sol.scouting.nl/hrm/vacancies/api.xml');
+        }
+
+
+        if (is_wp_error($response)) {
+            return "Er was een fout bij het ophalen van de vacatures.";
+        }
+
+        set_transient( 'vacancies_data', $response, 60 * 60 );
     }
 
     // Check if a GET parameter is set, for viewing a single vacancy
