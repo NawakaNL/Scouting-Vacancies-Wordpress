@@ -12,7 +12,7 @@
 
 function vacancies_display($atts) {
     // Check if response is set in database
-    if ( false === ( $response = get_transient( 'value' ) ) ) {
+    if ( false === ( $response = get_transient( 'vacancies_data' ) ) ) {
         // This code runs when there is no valid transient set
 
         // Get a response
