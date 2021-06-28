@@ -71,7 +71,7 @@ function vacancies_display($atts) {
 	} else {
 		$html = "";
 		if (isset($attr['title'])) {
-			$html = "<h1>".$attr['title']."</h1>";
+			$html .= "<h1>".$attr['title']."</h1>";
 		}
 		// Group vacancies by section
 		$vacancies = array();
@@ -100,7 +100,7 @@ function vacancies_display($atts) {
 					$html .= '</a>'; 
 				}
 			}
-			if (strcmp("", $section_title)) {
+			if (!(isset($section_title) === true && $section_title === '')) {
 				$html .= "</ul>";
 			}
 		}
