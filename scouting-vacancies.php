@@ -11,10 +11,16 @@
 
 
 function vacancies_display($atts) {
+    $response = get_transient('vacancies_data');
+		
+	// Delete transient if no correct data is available (i.e. API has maintenance)
+	if ($response["body"]->channel == null && $response != false) {
+		delete_transient('vacancies_data');
+	}
+	
     // Check if response is set in database
-    if ( false === ( $response = get_transient( 'vacancies_data' ) ) ) {
+    if ( false === $response) {
         // This code runs when there is no valid transient set
-
         // Get a response
         if (isset($attr['url'])) {
             $response = wp_remote_get($attr['url']);
@@ -27,9 +33,9 @@ function vacancies_display($atts) {
             return "Er was een fout bij het ophalen van de vacatures.";
         }
 
-        set_transient( 'vacancies_data', $response, 60 * 60 );
+        set_transient('vacancies_data', $response, 60 * 60);
     }
-
+	
     // Check if a GET parameter is set, for viewing a single vacancy
 	$vacancy = $_GET['vacancy'];
 	
