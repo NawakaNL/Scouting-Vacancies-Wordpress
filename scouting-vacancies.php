@@ -69,8 +69,10 @@ function vacancies_display($atts) {
 			}
 		}
 	} else {
-		$html = "<h1>Vacatures</h1>";
-		
+		$html = "";
+		if (isset($attr['title'])) {
+			$html = "<h1>".$attr['title']."</h1>";
+		}
 		// Group vacancies by section
 		$vacancies = array();
 		foreach($xml->channel->item as $item) {
@@ -89,6 +91,7 @@ function vacancies_display($atts) {
 					if (strcmp($item->section->name, $section_title)) {
 						$html .= "<h2>".$item->section->name."</h2>";
 						$section_title = $item->section->name;
+						$html .= "<ul>";
 					}
 
 					// Add vacancy
@@ -96,6 +99,9 @@ function vacancies_display($atts) {
 					$html .= "<li>".$item->title."</li>";
 					$html .= '</a>'; 
 				}
+			}
+			if (strcmp("", $section_title)) {
+				$html .= "</ul>";
 			}
 		}
 	}

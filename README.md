@@ -12,3 +12,8 @@ Or specify a specific API endpoint:
 ```
 [vacancies url="https://sol.scouting.nl/hrm/vacancies/api.xml" ]
 ```
+
+Specify a title
+```
+[vacancies url="https://sol.scouting.nl/hrm/vacancies/api.xml" title="Vacatures Nawaka"]
+```
