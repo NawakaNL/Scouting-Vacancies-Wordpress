@@ -35,7 +35,11 @@ function vacancies_display($atts) {
 	
     // Decode XML to SimpleXML format
 	$xml = simplexml_load_string(utf8_decode($response['body']));
-	
+
+    // Split comma separated line into list of organisations
+	if (!isset($atts["organisation"]) {
+		$organisations = explode(",", $atts["organisation"]);
+	}
     // Check if viewing single vacancy
 	if ($vacancy) {
 		foreach($xml->channel->item as $item)
@@ -86,7 +90,7 @@ function vacancies_display($atts) {
 		{
 			$section_title = "";
 			foreach ($section as $item) {
-				if (!isset($atts["organisation"]) || $item->organisation->attributes()->id == $atts["organisation"]) {
+				if (!isset($atts["organisation"]) || in_array($item->organisation->attributes()->id, $organisations)) {
 					// Append new section, create a title
 					if (strcmp($item->section->name, $section_title)) {
 						$html .= "<h2>".$item->section->name."</h2>";
