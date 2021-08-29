@@ -36,7 +36,7 @@ function vacancies_display($atts) {
 	$xml = simplexml_load_string(utf8_decode($response['body']));
 
     // Split comma separated line into list of organisations
-	if (isset($atts["organisation"]) {
+	if (isset($atts["organisation"])) {
 		$organisations = explode(",", $atts["organisation"]);
 	}
     // Check if viewing single vacancy
