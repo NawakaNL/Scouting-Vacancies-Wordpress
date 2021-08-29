@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Scouting Vacancies
  * Description: Display scouting vacancies on Wordpress Website.
- * Version: 0.1.6
+ * Version: 0.1.7
  * Text Domain: scouting-vacancies-wordpress
  * Author: Tristan de Boer
  * Author URI: https://www.tristandeboer.nl
