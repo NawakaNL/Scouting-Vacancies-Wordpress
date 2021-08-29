@@ -8,6 +8,11 @@ Specify a specific organisation:
 [vacancies organisation="1234" ]
 ```
 
+Or multiple organisations
+```
+[vacancies organisation="1234,3212" ]
+```
+
 Or specify a specific API endpoint:
 ```
 [vacancies url="https://sol.scouting.nl/hrm/vacancies/api.xml" ]
