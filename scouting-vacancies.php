@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name: Scouting Vacancies
- * Plugin URI: https://www.tristandeboer.nl
  * Description: Display scouting vacancies on Wordpress Website.
  * Version: 0.1.6
  * Text Domain: scouting-vacancies-wordpress
