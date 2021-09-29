@@ -92,7 +92,7 @@ function vacancies_display($atts) {
 				if (!isset($atts["organisation"]) || (isset($organisations) && in_array($item->organisation->attributes()->id, $organisations))) {
 					// Append new section, create a title
 					if (strcmp($item->section->name, $section_title)) {
-						$html .= "<h2>".$item->section->name."</h2>";
+						$html .= "<h2>".$item->organisation->name." ".$item->section->name."</h2>";
 						$section_title = $item->section->name;
 						$html .= "<ul>";
 					}
